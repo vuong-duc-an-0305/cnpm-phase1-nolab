@@ -1,0 +1,26 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files
+COPY package.json package-lock.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Build arguments để inject env variables vào build time
+ARG VITE_API_BASE_URL=http://16.171.13.43:8000/api
+ARG VITE_WS_PROTOCOL=ws
+
+# Set env variables cho Vite build
+ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
+ENV VITE_WS_PROTOCOL=${VITE_WS_PROTOCOL}
+
+# Expose port
+EXPOSE 5173
+
+# Run dev server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

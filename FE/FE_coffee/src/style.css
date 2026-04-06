@@ -1,0 +1,118 @@
+
+/* Custom Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #F5F5DC 0%, #FFF8E1 100%);
+  min-height: 100vh;
+  color: #3E2723;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F5DC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8860B;
+}
+
+/* Custom Components */
+.btn-primary {
+  @apply bg-gradient-to-r from-coffee-600 to-coffee-700 text-white px-4 py-2 rounded-xl font-semibold hover:shadow-lg transition-all duration-200 hover:scale-105;
+}
+
+.btn-secondary {
+  @apply bg-coffee-100 text-coffee-700 px-4 py-2 rounded-xl font-semibold hover:bg-coffee-200 transition-all duration-200;
+}
+
+.card {
+  @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+.input-field {
+  @apply w-full px-4 py-3 bg-coffee-50 border border-coffee-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:border-transparent transition-all duration-200;
+}
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.bounce-subtle {
+  animation: bounceSubtle 0.6s ease-in-out;
+}
+
+/* Loading Spinner */
+.spinner {
+  @apply inline-block w-6 h-6 border-2 border-coffee-200 border-t-coffee-600 rounded-full animate-spin;
+}
+
+/* Status Badges */
+.status-active {
+  @apply bg-green-100 text-green-700 px-3 py-1 rounded-lg text-sm font-medium;
+}
+
+.status-pending {
+  @apply bg-yellow-100 text-yellow-700 px-3 py-1 rounded-lg text-sm font-medium;
+}
+
+.status-inactive {
+  @apply bg-red-100 text-red-700 px-3 py-1 rounded-lg text-sm font-medium;
+}
+
+.status-completed {
+  @apply bg-green-100 text-green-700 px-3 py-1 rounded-lg text-sm font-medium;
+}
+
+.status-processing {
+  @apply bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-sm font-medium;
+}
+
+.status-cancelled {
+  @apply bg-red-100 text-red-700 px-3 py-1 rounded-lg text-sm font-medium;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-gradient-to-r from-coffee-600 to-coffee-500 bg-clip-text text-transparent;
+}
+
+/* Glass Effect */
+.glass {
+  @apply backdrop-blur-sm bg-white/80 border border-white/20;
+}
+
+/* Custom Focus Styles */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-coffee-500 focus:ring-offset-2;
+}

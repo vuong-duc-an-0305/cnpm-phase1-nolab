@@ -1,0 +1,20 @@
+Django==4.2.7
+djangorestframework==3.14.0
+django-cors-headers==4.3.1
+python-decouple==3.8
+psycopg2-binary==2.9.9
+openpyxl==3.1.5
+gunicorn==23.0.0
+gevent==24.2.1
+whitenoise==6.6.0
+redis==4.6.0
+django-redis==5.4.0
+hiredis==2.3.2
+
+# WebSocket support for real-time features (Phase 2)
+channels==4.0.0
+channels-redis==4.1.0
+daphne==4.0.0
+
+# Background tasks for async processing (Phase 3)
+celery==5.3.4

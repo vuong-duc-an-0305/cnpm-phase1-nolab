@@ -1,0 +1,60 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:13-alpine
+    container_name: coffee_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-coffee_db}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - coffee_network
+
+  # Django Backend
+  backend:
+    build:
+      context: ./BE
+      dockerfile: built_BE
+    container_name: coffee_backend
+    environment:
+      DB_NAME: ${DB_NAME:-coffee_db}
+      DB_USER: ${DB_USER:-postgres}
+      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_HOST: db
+      DB_PORT: 5432
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
+      DEBUG: ${DEBUG:-True}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./BE:/app
+      - /app/__pycache__
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    networks:
+      - coffee_network
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
+
+networks:
+  coffee_network:
+    driver: bridge
